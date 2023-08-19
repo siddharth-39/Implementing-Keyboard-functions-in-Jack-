@@ -1,0 +1,39 @@
+function int newKeyboardIntInput(String message) { 
+ 
+    var int curr_int;          // variable for final answer
+    var int curr_char;         // variable to get the input from keyboard
+    var int curr_digit;        // variable for current digit from input
+    var boolean is_negative;   // variable for checking for negative numbers
+
+    let curr_int = 0;       // variable for final answer
+
+    do Output.printString(message);
+
+    while (true) {   // Infinite loop to keep getting input until the newline character
+        let curr_char = Keyboard.readChar();    // Gets Input from Keyboard one character at a time
+
+        if ((curr_char = 45) & (curr_int = 0))  {     
+         let is_negative = true;    // If there is a minus sign entered first then it saves that information under is_negative
+        }
+        if (curr_char = 128) {       //128 = new-line
+            if (is_negative) {       // Checks for newline character to end input loop and return the correct value
+              return -curr_int;
+            }
+            return curr_int;
+          }
+
+          if (curr_char = 129) {       // 129 = backspace
+              let curr_int = curr_int / 10;     // If there is a backspace then remove the last entered character
+          }
+
+          if ((curr_char > 47) & (curr_char < 58)) {    // 48 = 0 , 57 = 9
+              let curr_digit = curr_char - 48;          // If the entered character lies inbetween 0 and 9 then add it to the final answer
+              if (curr_int = 0) {
+                  let curr_int = curr_digit;            // If this is the first input given then make the current input as the first input to the final answer
+              } else {
+                  let curr_int = (curr_int * 10) + curr_digit;   // If not first input simply add it to the end by multiplying the existing one with 10 and adding
+              }
+          }
+       } // end of while loop
+   return curr_int; 
+}  // end of function

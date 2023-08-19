@@ -1,0 +1,21 @@
+function String newKeyboardInput(String message) { 
+ 
+    var char curr_char;         // variable to get the input from keyboard
+    var String user_string;     // variable to store the final answer before returning it
+    let user_string = String.new(50);    // allocating memory for the final answer
+
+    do Output.printString(message);
+
+    while (true) {
+        let curr_char = Keyboard.readChar();     // get input from keyboard one by one
+        if (curr_char = 128) {         //128 = new-line
+            return user_string;        // If there is newline character then end the loop and return the final answer
+        }
+        if (curr_char = 129) {              //129 = backspace
+           do user_string.eraseLastChar();  // If there is a backspace then remove the last letter from user_string
+        } else {
+            let user_string = user_string.appendChar(curr_char);
+        }
+    } // end of while loop
+    return user_string;
+} // end of function

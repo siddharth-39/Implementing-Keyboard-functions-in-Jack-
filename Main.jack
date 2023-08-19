@@ -1,0 +1,91 @@
+class Main {
+
+	function String newKeyboardInput(String message) { 
+ 
+    var char curr_char;         // variable to get the input from keyboard
+    var String user_string;     // variable to store the final answer before returning it
+    let user_string = String.new(50);    // allocating memory for the final answer
+
+    do Output.printString(message);
+
+    while (true) {
+        let curr_char = Keyboard.readChar();     // get input from keyboard one by one
+        if (curr_char = 128) {         //128 = new-line
+            return user_string;        // If there is newline character then end the loop and return the final answer
+        }
+        if (curr_char = 129) {              //129 = backspace
+           do user_string.eraseLastChar();  // If there is a backspace then remove the last letter from user_string
+        } else {
+            let user_string = user_string.appendChar(curr_char);
+        }
+    } // end of while loop
+    return user_string;
+} // end of function
+
+function int newKeyboardIntInput(String message) { 
+ 
+    var int curr_int;          // variable for final answer
+    var int curr_char;         // variable to get the input from keyboard
+    var int curr_digit;        // variable for current digit from input
+    var boolean is_negative;   // variable for checking for negative numbers
+
+    let curr_int = 0;       // variable for final answer
+
+    do Output.printString(message);
+
+    while (true) {   // Infinite loop to keep getting input until the newline character
+        let curr_char = Keyboard.readChar();    // Gets Input from Keyboard one character at a time
+
+        if ((curr_char = 45) & (curr_int = 0))  {     
+         let is_negative = true;    // If there is a minus sign entered first then it saves that information under is_negative
+        }
+        if (curr_char = 128) {       //128 = new-line
+            if (is_negative) {       // Checks for newline character to end input loop and return the correct value
+              return -curr_int;
+            }
+            return curr_int;
+          }
+
+          if (curr_char = 129) {       // 129 = backspace
+              let curr_int = curr_int / 10;     // If there is a backspace then remove the last entered character
+          }
+
+          if ((curr_char > 47) & (curr_char < 58)) {    // 48 = 0 , 57 = 9
+              let curr_digit = curr_char - 48;          // If the entered character lies inbetween 0 and 9 then add it to the final answer
+              if (curr_int = 0) {
+                  let curr_int = curr_digit;            // If this is the first input given then make the current input as the first input to the final answer
+              } else {
+                  let curr_int = (curr_int * 10) + curr_digit;   // If not first input simply add it to the end by multiplying the existing one with 10 and adding
+              }
+          }
+       } // end of while loop
+   return curr_int; 
+}  // end of function
+
+
+    function void main(){
+        
+        // crating variables to store various inputs and outputs
+        var String messageOne;
+        var String messageTwo;
+        var String outputOne;
+        var int outputTwo;
+    
+        let messageOne  = "Enter your input: ";
+        let messageTwo  = "Enter your input number: ";
+    
+        let outputOne = Main.newKeyboardInput(messageOne);  // function one from the given question
+        do Output.printString("You entered: ");
+        do Output.printString(outputOne);
+        do Output.println();
+    
+        do Output.println();
+    
+        let outputTwo = Main.newKeyboardIntInput(messageTwo);   // function two from the given question
+        do Output.printString("You entered: ");
+        do Output.printInt(outputTwo);
+        do Output.println();
+    
+        return;
+      }
+   }
